@@ -6,73 +6,14 @@ const Hero: React.FC = () => {
   return (
     <div 
       id="home"
-      className="min-h-[100vh] flex flex-col items-center justify-center relative pt-20 overflow-hidden"
+      className="min-h-[100vh] flex flex-col items-center justify-center relative pt-20"
     >
-      {/* Background gradient */}
       <div 
         className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,190,255,0.15),rgba(255,255,255,0))]"
         aria-hidden="true"
       />
       
-      {/* DNA Helix */}
-      <div className="absolute inset-0 -z-5 opacity-20" aria-hidden="true">
-        <div className="absolute w-full h-full">
-          {/* DNA Strands */}
-          {[...Array(12)].map((_, i) => (
-            <div 
-              key={`dna-strand-${i}`}
-              className="absolute top-1/2 left-1/2 w-[300px] md:w-[500px] h-[2px] bg-medical-blue origin-center animate-rotate-slow"
-              style={{ 
-                transform: `translate(-50%, -50%) rotate(${i * 15}deg)`, 
-                animationDelay: `${i * 0.1}s`
-              }}
-            >
-              {/* DNA Rungs */}
-              {[...Array(10)].map((_, j) => (
-                <div 
-                  key={`rung-${i}-${j}`}
-                  className="absolute w-[10px] h-[10px] rounded-full bg-medical-blue animate-pulse-slow"
-                  style={{ 
-                    left: `${j * 10}%`, 
-                    top: `${j % 2 === 0 ? -10 : 10}px`,
-                    animationDelay: `${j * 0.2}s`
-                  }}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {/* Neural Network */}
-      <div className="absolute inset-0 -z-5 opacity-10" aria-hidden="true">
-        {/* Neural Nodes */}
-        {[...Array(15)].map((_, i) => (
-          <div 
-            key={`node-${i}`}
-            className="absolute w-[8px] h-[8px] rounded-full bg-medical-darkBlue animate-float-slow"
-            style={{ 
-              top: `${Math.random() * 100}%`, 
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`
-            }}
-          >
-            {/* Connection Lines */}
-            {[...Array(3)].map((_, j) => (
-              <div 
-                key={`connection-${i}-${j}`}
-                className="absolute top-1/2 left-1/2 w-[100px] h-[1px] bg-medical-darkBlue origin-left animate-pulse-slow opacity-70"
-                style={{ 
-                  transform: `rotate(${j * 120}deg)`,
-                  animationDelay: `${j * 0.3}s`
-                }}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
-      
-      <div className="container px-4 mx-auto relative z-10">
+      <div className="container px-4 mx-auto">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block animate-fade-down">
             <span className="inline-block py-1 px-3 mb-5 rounded-full bg-medical-lightBlue text-medical-blue text-sm font-medium">
