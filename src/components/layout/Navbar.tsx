@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, BookOpen } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,6 +30,7 @@ const Navbar: React.FC = () => {
     { name: "About", href: "#about" },
     { name: "Research", href: "#research" },
     { name: "Team", href: "#team" },
+    { name: "Journal", href: "#journal", icon: <BookOpen className="h-4 w-4 inline ml-1" /> },
     { name: "Publications", href: "#publications" },
     { name: "Contact", href: "#contact" },
   ];
@@ -63,11 +64,12 @@ const Navbar: React.FC = () => {
                 key={link.name}
                 href={link.href}
                 className={cn(
-                  "text-sm link-hover transition-colors",
+                  "text-sm link-hover transition-colors flex items-center",
                   isScrolled ? "text-gray-700" : "text-white"
                 )}
               >
                 {link.name}
+                {link.icon && link.icon}
               </a>
             ))}
           </div>
@@ -111,6 +113,9 @@ const Navbar: React.FC = () => {
             onClick={toggleMenu}
           >
             {link.name}
+            {link.icon && React.cloneElement(link.icon as React.ReactElement, { 
+              className: "h-6 w-6 inline ml-2"
+            })}
           </a>
         ))}
       </div>
