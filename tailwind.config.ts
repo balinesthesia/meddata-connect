@@ -123,6 +123,14 @@ export default {
 					'0%': { opacity: '0', transform: 'scale(0.8)' },
 					'100%': { opacity: '1', transform: 'scale(1)' }
 				},
+				'rotate': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-20px)' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
