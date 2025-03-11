@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
             )}
           >
             <span className="text-xl font-semibold tracking-tight">
-              MeddSAI
+              MEDDSAI
             </span>
           </a>
 
