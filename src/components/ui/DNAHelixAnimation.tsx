@@ -45,16 +45,18 @@ const DNAHelixAnimation: React.FC = () => {
 
     // Create DNA strands
     const strandCount = 2;
-    const strandSegments = 20;
+    const strandSegments = 24; // More segments for smoother spiral
+    const verticalSpacing = 25; // Spacing between segments
     const strands: DNAStrand[] = [];
     
+    // Create wider DNA spiral
     for (let i = 0; i < strandCount; i++) {
       for (let j = 0; j < strandSegments; j++) {
         const strand: DNAStrand = {
           x: 0,
-          y: j * 30 - (strandSegments * 15),
+          y: j * verticalSpacing - (strandSegments * verticalSpacing / 2),
           z: 0,
-          radius: 5,
+          radius: 6,
           color: i === 0 ? '#E1F0FF' : '#C2FFE8',
           opacity: 0.8
         };
@@ -63,18 +65,18 @@ const DNAHelixAnimation: React.FC = () => {
     }
     
     // Create particles
-    const particleCount = 12;
+    const particleCount = 15; // Increased number of particles
     const particles: Particle[] = [];
     
     for (let i = 0; i < particleCount; i++) {
       const particle: Particle = {
         x: 0,
-        y: (Math.random() - 0.5) * (strandSegments * 30),
+        y: (Math.random() - 0.5) * (strandSegments * verticalSpacing),
         z: 0,
-        radius: Math.random() * 2 + 1,
+        radius: Math.random() * 2.5 + 1,
         color: Math.random() > 0.5 ? '#00E5FF' : '#00FF9D',
         opacity: Math.random() * 0.5 + 0.3,
-        orbitRadius: Math.random() * 30 + 70,
+        orbitRadius: Math.random() * 50 + 120, // Much wider orbit radius
         orbitSpeed: (Math.random() * 0.01 + 0.005) * (Math.random() > 0.5 ? 1 : -1),
         angle: Math.random() * Math.PI * 2,
         fadeDirection: Math.random() > 0.5 ? 1 : -1
@@ -92,26 +94,30 @@ const DNAHelixAnimation: React.FC = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Update rotation and floating effect
-      rotationAngle += 0.005; // Full rotation every ~5 seconds
-      floatOffset += 0.015 * floatDirection;
+      rotationAngle += 0.004; // Slightly slower rotation
+      floatOffset += 0.012 * floatDirection;
       
       if (floatOffset > 15 || floatOffset < -15) {
         floatDirection *= -1;
       }
       
       // Center position with offset
-      const centerX = canvas.width / 2 + Math.sin(rotationAngle * 0.5) * 30;
+      const centerX = canvas.width / 2 + Math.sin(rotationAngle * 0.5) * 40;
       const centerY = canvas.height / 2 + floatOffset;
       
-      // Draw DNA strands
+      // Draw DNA strands with spiral pattern
       for (let i = 0; i < strands.length; i++) {
         const strand = strands[i];
         const strandIndex = i % 2;
-        const angle = rotationAngle + (strandIndex * Math.PI);
         
-        // Calculate 3D position
-        strand.x = Math.cos(angle) * 50;
-        strand.z = Math.sin(angle) * 50;
+        // Create spiral pattern by offsetting the angle
+        const segmentIndex = Math.floor(i / 2);
+        const segmentOffset = segmentIndex * Math.PI / 6; // Creates the spiral effect
+        const angle = rotationAngle + (strandIndex * Math.PI) + segmentOffset;
+        
+        // Calculate 3D position with wider radius
+        strand.x = Math.cos(angle) * 120; // Wider radius
+        strand.z = Math.sin(angle) * 120; // Wider radius
         
         // Apply perspective
         const scale = 800 / (800 + strand.z);
@@ -124,21 +130,38 @@ const DNAHelixAnimation: React.FC = () => {
         ctx.fillStyle = `${strand.color}${Math.floor(strand.opacity * 255).toString(16).padStart(2, '0')}`;
         ctx.fill();
         
-        // Connect strands
+        // Connect strands (backbone connections)
         if (i > 0 && (i % 2) === 1) {
           const prevStrand = strands[i - 1];
-          const prevAngle = rotationAngle + ((i - 1) % 2 * Math.PI);
-          const prevX = Math.cos(prevAngle) * 50;
-          const prevZ = Math.sin(prevAngle) * 50;
+          const prevAngle = rotationAngle + ((i - 1) % 2 * Math.PI) + segmentOffset;
+          const prevX = Math.cos(prevAngle) * 120; // Match the wider radius
+          const prevZ = Math.sin(prevAngle) * 120; // Match the wider radius
           const prevScale = 800 / (800 + prevZ);
           const prevX2d = centerX + prevX * prevScale;
           const prevY2d = centerY + prevStrand.y * prevScale;
           
+          // Draw the connecting line (base pair)
           ctx.beginPath();
           ctx.moveTo(x2d, y2d);
           ctx.lineTo(prevX2d, prevY2d);
           ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * scale})`;
-          ctx.lineWidth = 1 * scale;
+          ctx.lineWidth = 1.5 * scale;
+          ctx.stroke();
+        }
+        
+        // Draw strand connections (connect vertically to form backbones)
+        if (i > 1 && (i % 2) === strandIndex) {
+          const prevStrandInBackbone = strands[i - 2];
+          const prevScale = 800 / (800 + prevStrandInBackbone.z);
+          const prevX2d = centerX + prevStrandInBackbone.x * prevScale;
+          const prevY2d = centerY + prevStrandInBackbone.y * prevScale;
+          
+          // Draw backbone connection
+          ctx.beginPath();
+          ctx.moveTo(x2d, y2d);
+          ctx.lineTo(prevX2d, prevY2d);
+          ctx.strokeStyle = `${strand.color}${Math.floor(strand.opacity * 180).toString(16).padStart(2, '0')}`;
+          ctx.lineWidth = 2 * scale;
           ctx.stroke();
         }
       }
@@ -170,7 +193,7 @@ const DNAHelixAnimation: React.FC = () => {
         // Create glow effect
         const gradient = ctx.createRadialGradient(
           x2d, y2d, 0,
-          x2d, y2d, particle.radius * 3 * scale
+          x2d, y2d, particle.radius * 4 * scale
         );
         gradient.addColorStop(0, `${particle.color}${Math.floor(particle.opacity * 255).toString(16).padStart(2, '0')}`);
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
