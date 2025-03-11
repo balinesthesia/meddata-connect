@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-medical-blue">MeddSAI</h3>
+            <h3 className="text-xl font-semibold text-medical-blue">MedDSAI</h3>
             <p className="text-gray-600 max-w-md">
               Medical Data Science and Artificial Intelligence Division under the Department of Anesthesiology and Intensive Care, Medical Faculty of Udayana University.
             </p>
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            &copy; {currentYear} MeddSAI. All rights reserved.
+            &copy; {currentYear} MedDSAI. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0 text-sm text-gray-500">
             <a href="#" className="hover:text-medical-blue transition-colors">

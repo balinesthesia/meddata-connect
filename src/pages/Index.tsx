@@ -12,7 +12,7 @@ import Contact from "@/components/sections/Contact";
 const Index = () => {
   useEffect(() => {
     // Update document title
-    document.title = "MeddSAI - Medical Data Science & AI Division";
+    document.title = "MedDSAI - Medical Data Science & AI Division";
     
     // Smooth scroll for anchor links
     const handleAnchorClick = (e: MouseEvent) => {
