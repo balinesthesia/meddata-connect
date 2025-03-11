@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 interface DNAStrand {
@@ -44,8 +45,8 @@ const DNAHelixAnimation: React.FC = () => {
 
     // Create DNA strands
     const strandCount = 2;
-    const strandSegments = 24; // More segments for smoother spiral
-    const verticalSpacing = 25; // Spacing between segments
+    const strandSegments = 48; // Doubled from 24 to 48 for more connections
+    const verticalSpacing = 12.5; // Halved from 25 to maintain the same total height
     const strands: DNAStrand[] = [];
     
     // Create wider DNA spiral
@@ -110,7 +111,7 @@ const DNAHelixAnimation: React.FC = () => {
         const strandIndex = i % 2;
         
         const segmentIndex = Math.floor(i / 2);
-        const segmentOffset = segmentIndex * Math.PI / 6;
+        const segmentOffset = segmentIndex * Math.PI / 12; // Adjusted from PI/6 to PI/12 to match doubled segments
         const angle = rotationAngle + (strandIndex * Math.PI) + segmentOffset;
         
         // Calculate base position
