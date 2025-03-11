@@ -130,7 +130,7 @@ const DNAHelixAnimation: React.FC = () => {
         ctx.fillStyle = `${strand.color}${Math.floor(strand.opacity * 255).toString(16).padStart(2, '0')}`;
         ctx.fill();
         
-        // Connect strands (backbone connections)
+        // Connect strands (horizontal connections / base pairs only)
         if (i > 0 && (i % 2) === 1) {
           const prevStrand = strands[i - 1];
           const prevAngle = rotationAngle + ((i - 1) % 2 * Math.PI) + segmentOffset;
@@ -144,26 +144,12 @@ const DNAHelixAnimation: React.FC = () => {
           ctx.beginPath();
           ctx.moveTo(x2d, y2d);
           ctx.lineTo(prevX2d, prevY2d);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * scale})`; // Reduced opacity from 0.15 to 0.1
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * scale})`; // Reduced opacity for base pairs
           ctx.lineWidth = 1.5 * scale;
           ctx.stroke();
         }
         
-        // Draw strand connections (connect vertically to form backbones)
-        if (i > 1 && (i % 2) === strandIndex) {
-          const prevStrandInBackbone = strands[i - 2];
-          const prevScale = 800 / (800 + prevStrandInBackbone.z);
-          const prevX2d = centerX + prevStrandInBackbone.x * prevScale;
-          const prevY2d = centerY + prevStrandInBackbone.y * prevScale;
-          
-          // Draw backbone connection with reduced opacity
-          ctx.beginPath();
-          ctx.moveTo(x2d, y2d);
-          ctx.lineTo(prevX2d, prevY2d);
-          ctx.strokeStyle = `${strand.color}${Math.floor(strand.opacity * 100).toString(16).padStart(2, '0')}`; // Reduced opacity from 140 to 100
-          ctx.lineWidth = 2 * scale;
-          ctx.stroke();
-        }
+        // Removed the vertical backbone connections
       }
       
       // Update and draw particles
