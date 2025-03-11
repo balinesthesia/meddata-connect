@@ -40,14 +40,7 @@ export default defineConfig(({ mode }) => ({
   // Optimize build for modern browsers
   build: {
     target: "es2015",
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        // Help mitigate RegExp issues
-        sequences: false,
-      },
-    },
-    // Configure SWC at the build level instead
+    minify: "esbuild", // Changed from "terser" to "esbuild" to avoid requiring terser
     rollupOptions: {
       output: {
         manualChunks: {
