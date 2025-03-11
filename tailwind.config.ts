@@ -131,6 +131,25 @@ export default {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-20px)' }
 				},
+				'dna-rotate': {
+					'0%': { transform: 'rotateX(0deg) rotateY(0deg)' },
+					'100%': { transform: 'rotateX(360deg) rotateY(360deg)' }
+				},
+				'dna-float': {
+					'0%, 100%': { transform: 'translateY(0) translateX(0)' },
+					'25%': { transform: 'translateY(-15px) translateX(10px)' },
+					'50%': { transform: 'translateY(0) translateX(0)' },
+					'75%': { transform: 'translateY(15px) translateX(-10px)' },
+				},
+				'neural-pulse': {
+					'0%, 100%': { opacity: '0.5', transform: 'scale(1)' },
+					'50%': { opacity: '1', transform: 'scale(1.1)' },
+				},
+				'neural-move': {
+					'0%': { transform: 'translateX(0)' },
+					'50%': { transform: 'translateX(20px)' },
+					'100%': { transform: 'translateX(0)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -140,6 +159,10 @@ export default {
 				'fade-down': 'fade-down 0.7s ease-out',
 				'blur-in': 'blur-in 0.7s ease-out',
 				'scale-in': 'scale-in 0.7s ease-out',
+				'dna-rotate': 'dna-rotate 15s linear infinite',
+				'dna-float': 'dna-float 15s ease-in-out infinite',
+				'neural-pulse': 'neural-pulse 3s ease-in-out infinite',
+				'neural-move': 'neural-move 8s ease-in-out infinite',
 			},
 			transitionTimingFunction: {
 				'in-expo': 'cubic-bezier(0.95, 0.05, 0.795, 0.035)',

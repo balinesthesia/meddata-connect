@@ -13,32 +13,89 @@ const Hero: React.FC = () => {
         aria-hidden="true"
       />
       
-      {/* Floating animation elements */}
+      {/* DNA Helix Animation */}
       <div className="absolute inset-0 -z-5 overflow-hidden">
-        {/* Data points floating animation with rotation */}
-        <div className="absolute h-2 w-2 bg-medical-blue rounded-full top-1/4 left-1/4 animate-pulse opacity-70 animate-[spin_8s_linear_infinite]"></div>
-        <div className="absolute h-3 w-3 bg-medical-blue rounded-full top-1/3 left-1/2 animate-pulse opacity-50 animate-delay-300 animate-[spin_12s_linear_infinite]"></div>
-        <div className="absolute h-2 w-2 bg-medical-blue rounded-full top-2/3 left-1/3 animate-pulse opacity-60 animate-delay-500 animate-[spin_15s_linear_infinite]"></div>
-        <div className="absolute h-4 w-4 bg-medical-blue rounded-full top-1/2 left-3/4 animate-pulse opacity-40 animate-[spin_10s_linear_infinite]"></div>
+        {/* DNA Strand 1 */}
+        <div className="absolute left-1/4 top-0 h-full w-2 flex flex-col items-center justify-around animate-dna-float">
+          <div className="relative w-full">
+            {[...Array(10)].map((_, i) => (
+              <div 
+                key={`dna-1-${i}`} 
+                className="absolute h-4 w-4 bg-medical-blue/30 rounded-full animate-dna-rotate"
+                style={{
+                  top: `${i * 10}vh`,
+                  left: `${Math.sin(i * 0.8) * 50}px`,
+                  animationDelay: `${i * 0.3}s`,
+                  animationDuration: `${15 + i * 0.5}s`
+                }}
+              />
+            ))}
+          </div>
+        </div>
         
-        {/* Additional moving data points */}
-        <div className="absolute h-3 w-3 bg-medical-blue/40 rounded-full animate-pulse opacity-50 animate-[spin_8s_linear_infinite,float_15s_ease-in-out_infinite]" 
-             style={{top: '30%', left: '20%'}}></div>
-        <div className="absolute h-2 w-2 bg-medical-blue/30 rounded-full animate-pulse opacity-60 animate-[spin_10s_linear_infinite,float_20s_ease-in-out_infinite]" 
-             style={{top: '65%', left: '65%'}}></div>
+        {/* DNA Strand 2 */}
+        <div className="absolute right-1/4 top-0 h-full w-2 flex flex-col items-center justify-around animate-dna-float" style={{ animationDelay: '1s' }}>
+          <div className="relative w-full">
+            {[...Array(10)].map((_, i) => (
+              <div 
+                key={`dna-2-${i}`} 
+                className="absolute h-4 w-4 bg-medical-blue/30 rounded-full animate-dna-rotate"
+                style={{
+                  top: `${i * 10}vh`,
+                  right: `${Math.sin(i * 0.8) * 50}px`,
+                  animationDelay: `${i * 0.3 + 1}s`,
+                  animationDuration: `${15 + i * 0.5}s`
+                }}
+              />
+            ))}
+          </div>
+        </div>
         
-        {/* Neural network lines with rotation */}
-        <div className="absolute h-[1px] w-40 bg-gradient-to-r from-transparent via-medical-blue/30 to-transparent rotate-45 top-1/3 left-1/4 animate-fade-in animate-delay-200 animate-[rotate_15s_linear_infinite]"></div>
-        <div className="absolute h-[1px] w-32 bg-gradient-to-r from-transparent via-medical-blue/20 to-transparent -rotate-45 top-1/2 left-1/3 animate-fade-in animate-delay-300 animate-[rotate_20s_linear_infinite_reverse]"></div>
-        <div className="absolute h-[1px] w-48 bg-gradient-to-r from-transparent via-medical-blue/30 to-transparent rotate-12 top-2/3 left-1/2 animate-fade-in animate-[rotate_25s_linear_infinite]"></div>
+        {/* Connecting lines between DNA strands */}
+        {[...Array(10)].map((_, i) => (
+          <div 
+            key={`dna-connect-${i}`}
+            className="absolute h-[1px] bg-gradient-to-r from-transparent via-medical-blue/30 to-transparent"
+            style={{
+              top: `${i * 10}vh`,
+              left: `calc(25% + ${Math.sin(i * 0.8) * 50}px)`,
+              right: `calc(25% + ${Math.sin(i * 0.8) * 50}px)`,
+              transform: i % 2 === 0 ? 'rotate(5deg)' : 'rotate(-5deg)',
+              animationDelay: `${i * 0.3}s`
+            }}
+          />
+        ))}
         
-        {/* Additional animated lines */}
-        <div className="absolute h-[1px] w-36 bg-gradient-to-r from-transparent via-medical-blue/25 to-transparent rotate-30 top-2/5 left-3/5 animate-fade-in animate-delay-400 animate-[rotate_18s_linear_infinite_reverse]"></div>
-        
-        {/* Floating circles */}
-        <div className="absolute h-20 w-20 border border-medical-blue/10 rounded-full top-1/4 right-1/4 animate-[ping_4s_cubic-bezier(0,0,0.2,1)_infinite] opacity-30 animate-[rotate_30s_linear_infinite]"></div>
-        <div className="absolute h-32 w-32 border border-medical-blue/5 rounded-full bottom-1/4 left-1/4 animate-[ping_5s_cubic-bezier(0,0,0.2,1)_infinite] opacity-20 animate-delay-200 animate-[rotate_40s_linear_infinite_reverse]"></div>
-        <div className="absolute h-48 w-48 border border-medical-blue/5 rounded-full top-1/3 right-1/3 animate-[ping_6s_cubic-bezier(0,0,0.2,1)_infinite] opacity-10 animate-delay-400 animate-[rotate_50s_linear_infinite]"></div>
+        {/* Neural Network Nodes */}
+        <div className="absolute inset-0">
+          {[...Array(8)].map((_, i) => (
+            <div 
+              key={`neural-node-${i}`}
+              className="absolute h-3 w-3 bg-medical-blue/40 rounded-full animate-neural-pulse"
+              style={{
+                top: `${20 + i * 8}%`,
+                left: `${15 + (i % 3) * 30}%`,
+                animationDelay: `${i * 0.5}s`,
+              }}
+            />
+          ))}
+          
+          {/* Neural Network Connections */}
+          {[...Array(12)].map((_, i) => (
+            <div 
+              key={`neural-connection-${i}`}
+              className="absolute h-[1px] bg-gradient-to-r from-medical-blue/20 to-medical-blue/5 animate-neural-move"
+              style={{
+                top: `${25 + (i % 6) * 10}%`,
+                left: `${20 + (i % 3) * 25}%`,
+                width: `${100 + (i % 5) * 20}px`,
+                transform: `rotate(${45 + (i % 4) * 30}deg)`,
+                animationDelay: `${i * 0.3}s`,
+                transformOrigin: 'left center'
+              }}
+            />
+          ))}
+        </div>
       </div>
       
       <div className="container px-4 mx-auto relative z-10">
