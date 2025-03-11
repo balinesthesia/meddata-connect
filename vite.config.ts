@@ -27,6 +27,16 @@ export default defineConfig(({ mode }) => ({
     react({
       // Using React plugin with latest features
       tsDecorators: true,
+      // Configure SWC to handle RegExp issues better
+      swcOptions: {
+        jsc: {
+          transform: {
+            optimizer: {
+              simplify: true,
+            },
+          },
+        },
+      },
     }),
     mode === 'development' &&
     componentTagger(),
@@ -34,6 +44,17 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  // Optimize build for modern browsers
+  build: {
+    target: "es2015",
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        // Help mitigate RegExp issues
+        sequences: false,
+      },
     },
   },
 }));
