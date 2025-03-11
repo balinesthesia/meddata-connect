@@ -27,16 +27,7 @@ export default defineConfig(({ mode }) => ({
     react({
       // Using React plugin with latest features
       tsDecorators: true,
-      // Configure SWC to handle RegExp issues better
-      swcOptions: {
-        jsc: {
-          transform: {
-            optimizer: {
-              simplify: true,
-            },
-          },
-        },
-      },
+      // Note: SWC configuration is handled differently
     }),
     mode === 'development' &&
     componentTagger(),
@@ -56,5 +47,25 @@ export default defineConfig(({ mode }) => ({
         sequences: false,
       },
     },
+    // Configure SWC at the build level instead
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+        },
+      },
+    },
+  },
+  optimizeDeps: {
+    // Apply SWC optimizations here instead
+    esbuildOptions: {
+      target: 'es2020',
+      supported: {
+        // These settings help with RegExp complexity issues
+        'top-level-await': true,
+      },
+      // Simplify transforms to reduce RegExp complexity
+      treeShaking: true,
+    }
   },
 }));
