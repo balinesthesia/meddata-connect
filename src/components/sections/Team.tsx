@@ -1,7 +1,7 @@
 
 import React from "react";
 import Section from "../ui/Section";
-import { LinkedIn, Mail } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 
 interface TeamMember {
   id: number;
@@ -101,7 +101,7 @@ const Team: React.FC = () => {
                     target="_blank" 
                     rel="noopener noreferrer"
                   >
-                    <LinkedIn className="h-5 w-5" />
+                    <Linkedin className="h-5 w-5" />
                   </a>
                 )}
               </div>
