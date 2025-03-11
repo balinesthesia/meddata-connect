@@ -47,7 +47,9 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between">
           <a
             href="#"
-            className="flex items-center space-x-3 text-medical-blue"
+            className={cn("flex items-center space-x-3", 
+              isScrolled ? "text-medical-blue" : "text-white"
+            )}
           >
             <span className="text-xl font-semibold tracking-tight">
               MeddSAI
@@ -60,7 +62,10 @@ const Navbar: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm text-gray-700 link-hover"
+                className={cn(
+                  "text-sm link-hover transition-colors",
+                  isScrolled ? "text-gray-700" : "text-white"
+                )}
               >
                 {link.name}
               </a>
@@ -69,7 +74,10 @@ const Navbar: React.FC = () => {
 
           {/* Mobile Navigation Trigger */}
           <button
-            className="block md:hidden text-gray-700"
+            className={cn(
+              "block md:hidden", 
+              isScrolled ? "text-gray-700" : "text-white"
+            )}
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
