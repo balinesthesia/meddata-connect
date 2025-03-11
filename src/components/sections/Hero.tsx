@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
       <DNAHelixAnimation />
       
       <div className="container px-4 mx-auto relative z-10">
-        <div className="max-w-4xl mx-auto md:mx-0 md:ml-auto md:mr-16 md:text-right">
+        <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block animate-fade-down">
             <span className="inline-block py-1 px-3 mb-5 rounded-full bg-medical-lightBlue text-medical-blue text-sm font-medium">
               Medical Data Science & AI Division
@@ -31,11 +31,11 @@ const Hero: React.FC = () => {
             <span className="text-medical-blue"> Data Science & AI</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-gray-200 mb-10 animate-fade-down animate-delay-200 max-w-3xl mx-auto md:mx-0 md:ml-auto">
+          <p className="text-lg md:text-xl text-gray-200 mb-10 animate-fade-down animate-delay-200 max-w-3xl mx-auto">
             Advancing anesthesiology and intensive care through innovative research, data-driven insights, and cutting-edge artificial intelligence at Udayana University.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-end animate-fade-down animate-delay-300">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-down animate-delay-300">
             <a 
               href="#about" 
               className="px-6 py-3 rounded-lg bg-medical-blue text-white font-medium transition-all hover:shadow-lg hover:translate-y-[-2px]"
