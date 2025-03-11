@@ -58,7 +58,7 @@ const DNAHelixAnimation: React.FC = () => {
           z: 0,
           radius: 6,
           color: i === 0 ? '#E1F0FF' : '#C2FFE8',
-          opacity: 0.25
+          opacity: 0.15 // Reduced from 0.25 to 0.15
         };
         strands.push(strand);
       }
@@ -75,7 +75,7 @@ const DNAHelixAnimation: React.FC = () => {
         z: 0,
         radius: Math.random() * 2.5 + 1,
         color: Math.random() > 0.5 ? '#00E5FF' : '#00FF9D',
-        opacity: Math.random() * 0.5 + 0.3,
+        opacity: Math.random() * 0.15 + 0.15, // Reduced from 0.5+0.3 to 0.15+0.15
         orbitRadius: Math.random() * 50 + 120,
         orbitSpeed: (Math.random() * 0.01 + 0.005) * (Math.random() > 0.5 ? 1 : -1),
         angle: Math.random() * Math.PI * 2,
@@ -149,15 +149,15 @@ const DNAHelixAnimation: React.FC = () => {
           const extendedX2 = midX + vecX2 * 2;
           const extendedY2 = midY + vecY2 * 2;
           
-          // Draw the connecting line
+          // Draw the connecting line with reduced opacity
           ctx.beginPath();
           ctx.moveTo(extendedX1, extendedY1);
           ctx.lineTo(extendedX2, extendedY2);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * scale})`;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 * scale})`; // Reduced from 0.1 to 0.05
           ctx.lineWidth = 1.5 * scale;
           ctx.stroke();
           
-          // Draw dots at extended positions
+          // Draw dots at extended positions with reduced opacity
           ctx.beginPath();
           ctx.arc(extendedX1, extendedY1, strand.radius * scale, 0, Math.PI * 2);
           ctx.fillStyle = `${strand.color}${Math.floor(strand.opacity * 255).toString(16).padStart(2, '0')}`;
@@ -170,7 +170,7 @@ const DNAHelixAnimation: React.FC = () => {
         }
       }
       
-      // Update and draw particles
+      // Update and draw particles with reduced opacity
       for (let i = 0; i < particles.length; i++) {
         const particle = particles[i];
         
@@ -179,9 +179,9 @@ const DNAHelixAnimation: React.FC = () => {
         particle.x = Math.cos(particle.angle) * particle.orbitRadius;
         particle.z = Math.sin(particle.angle) * particle.orbitRadius;
         
-        // Update opacity for fading effect
+        // Update opacity for fading effect (with reduced range)
         particle.opacity += 0.01 * particle.fadeDirection;
-        if (particle.opacity > 0.8 || particle.opacity < 0.1) {
+        if (particle.opacity > 0.3 || particle.opacity < 0.05) { // Reduced from 0.8/0.1 to 0.3/0.05
           particle.fadeDirection *= -1;
         }
         
@@ -194,7 +194,7 @@ const DNAHelixAnimation: React.FC = () => {
         ctx.beginPath();
         ctx.arc(x2d, y2d, particle.radius * scale, 0, Math.PI * 2);
         
-        // Create glow effect
+        // Create glow effect with reduced opacity
         const gradient = ctx.createRadialGradient(
           x2d, y2d, 0,
           x2d, y2d, particle.radius * 4 * scale
