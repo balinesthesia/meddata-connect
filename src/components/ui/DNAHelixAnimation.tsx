@@ -58,7 +58,7 @@ const DNAHelixAnimation: React.FC = () => {
           z: 0,
           radius: 6,
           color: i === 0 ? '#E1F0FF' : '#C2FFE8',
-          opacity: 0.5 // Reduced opacity from 0.8 to 0.5 to make the helix more transparent
+          opacity: 0.25 // Reduced opacity from 0.5 to 0.25 to make the helix more transparent
         };
         strands.push(strand);
       }
@@ -144,7 +144,7 @@ const DNAHelixAnimation: React.FC = () => {
           ctx.beginPath();
           ctx.moveTo(x2d, y2d);
           ctx.lineTo(prevX2d, prevY2d);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 * scale})`; // Reduced opacity from 0.2 to 0.15
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * scale})`; // Reduced opacity from 0.15 to 0.1
           ctx.lineWidth = 1.5 * scale;
           ctx.stroke();
         }
@@ -160,7 +160,7 @@ const DNAHelixAnimation: React.FC = () => {
           ctx.beginPath();
           ctx.moveTo(x2d, y2d);
           ctx.lineTo(prevX2d, prevY2d);
-          ctx.strokeStyle = `${strand.color}${Math.floor(strand.opacity * 140).toString(16).padStart(2, '0')}`; // Reduced opacity from 180 to 140
+          ctx.strokeStyle = `${strand.color}${Math.floor(strand.opacity * 100).toString(16).padStart(2, '0')}`; // Reduced opacity from 140 to 100
           ctx.lineWidth = 2 * scale;
           ctx.stroke();
         }
