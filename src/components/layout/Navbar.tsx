@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X, BookOpen } from "lucide-react";
+import { Menu, X, BookOpen, ExternalLink } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,7 +30,12 @@ const Navbar: React.FC = () => {
     { name: "About", href: "#about" },
     { name: "Research", href: "#research" },
     { name: "Team", href: "#team" },
-    { name: "Journal", href: "#journal", icon: <BookOpen className="h-4 w-4 inline ml-1" /> },
+    { 
+      name: "Journal", 
+      href: "https://mortonjournal.org", 
+      external: true,
+      icon: <BookOpen className="h-4 w-4 inline ml-1" /> 
+    },
     { name: "Publications", href: "#publications" },
     { name: "Contact", href: "#contact" },
   ];
@@ -63,6 +68,8 @@ const Navbar: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
                 className={cn(
                   "text-sm link-hover transition-colors flex items-center",
                   isScrolled ? "text-gray-700" : "text-white"
@@ -70,6 +77,7 @@ const Navbar: React.FC = () => {
               >
                 {link.name}
                 {link.icon && link.icon}
+                {link.external && <ExternalLink className="h-3 w-3 inline ml-1" />}
               </a>
             ))}
           </div>
@@ -103,6 +111,8 @@ const Navbar: React.FC = () => {
           <a
             key={link.name}
             href={link.href}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
             className={cn(
               "text-3xl font-medium py-4 border-b border-gray-100 transition-all duration-300",
               "hover:pl-2 hover:text-medical-blue"
@@ -116,6 +126,7 @@ const Navbar: React.FC = () => {
             {link.icon && React.cloneElement(link.icon as React.ReactElement, { 
               className: "h-6 w-6 inline ml-2"
             })}
+            {link.external && <ExternalLink className="h-5 w-5 inline ml-2" />}
           </a>
         ))}
       </div>

@@ -8,7 +8,6 @@ import Research from "@/components/sections/Research";
 import Team from "@/components/sections/Team";
 import Publications from "@/components/sections/Publications";
 import Contact from "@/components/sections/Contact";
-import Journal from "@/components/sections/Journal";
 
 const Index = () => {
   useEffect(() => {
@@ -45,7 +44,6 @@ const Index = () => {
         <About />
         <Research />
         <Team />
-        <Journal />
         <Publications />
         <Contact />
       </main>
