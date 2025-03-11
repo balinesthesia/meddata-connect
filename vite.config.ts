@@ -2,7 +2,15 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
+
+// Try to import componentTagger, but don't fail if it's not compatible
+let componentTagger;
+try {
+  componentTagger = require("lovable-tagger").componentTagger;
+} catch (error) {
+  console.warn("Warning: lovable-tagger could not be loaded, continuing without it");
+  componentTagger = () => null;
+}
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -27,10 +35,9 @@ export default defineConfig(({ mode }) => ({
     react({
       // Using React plugin with latest features
       tsDecorators: true,
-      // Note: SWC configuration is handled differently
     }),
-    mode === 'development' &&
-    componentTagger(),
+    // Only use componentTagger in development mode if it's available
+    mode === 'development' && componentTagger ? componentTagger() : null,
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -40,7 +47,7 @@ export default defineConfig(({ mode }) => ({
   // Optimize build for modern browsers
   build: {
     target: "es2015",
-    minify: "esbuild", // Changed from "terser" to "esbuild" to avoid requiring terser
+    minify: "esbuild", // Using esbuild for minification
     rollupOptions: {
       output: {
         manualChunks: {
