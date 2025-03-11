@@ -24,7 +24,10 @@ export default defineConfig(({ mode }) => ({
   },
   base: "/", // Changed from "./" to "/" for custom domain support
   plugins: [
-    react(),
+    react({
+      // Using React plugin with latest features
+      tsDecorators: true,
+    }),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
