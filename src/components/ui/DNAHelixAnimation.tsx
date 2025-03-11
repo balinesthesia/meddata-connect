@@ -58,14 +58,14 @@ const DNAHelixAnimation: React.FC = () => {
           z: 0,
           radius: 6,
           color: i === 0 ? '#E1F0FF' : '#C2FFE8',
-          opacity: 0.25 // Reduced opacity from 0.5 to 0.25 to make the helix more transparent
+          opacity: 0.25
         };
         strands.push(strand);
       }
     }
     
     // Create particles
-    const particleCount = 15; // Increased number of particles
+    const particleCount = 15;
     const particles: Particle[] = [];
     
     for (let i = 0; i < particleCount; i++) {
@@ -76,7 +76,7 @@ const DNAHelixAnimation: React.FC = () => {
         radius: Math.random() * 2.5 + 1,
         color: Math.random() > 0.5 ? '#00E5FF' : '#00FF9D',
         opacity: Math.random() * 0.5 + 0.3,
-        orbitRadius: Math.random() * 50 + 120, // Much wider orbit radius
+        orbitRadius: Math.random() * 50 + 120,
         orbitSpeed: (Math.random() * 0.01 + 0.005) * (Math.random() > 0.5 ? 1 : -1),
         angle: Math.random() * Math.PI * 2,
         fadeDirection: Math.random() > 0.5 ? 1 : -1
@@ -94,7 +94,7 @@ const DNAHelixAnimation: React.FC = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Update rotation and floating effect
-      rotationAngle += 0.004; // Slightly slower rotation
+      rotationAngle += 0.004;
       floatOffset += 0.012 * floatDirection;
       
       if (floatOffset > 15 || floatOffset < -15) {
@@ -116,8 +116,8 @@ const DNAHelixAnimation: React.FC = () => {
         const angle = rotationAngle + (strandIndex * Math.PI) + segmentOffset;
         
         // Calculate 3D position with wider radius
-        strand.x = Math.cos(angle) * 120; // Wider radius
-        strand.z = Math.sin(angle) * 120; // Wider radius
+        strand.x = Math.cos(angle) * 120;
+        strand.z = Math.sin(angle) * 120;
         
         // Apply perspective
         const scale = 800 / (800 + strand.z);
@@ -130,26 +130,42 @@ const DNAHelixAnimation: React.FC = () => {
         ctx.fillStyle = `${strand.color}${Math.floor(strand.opacity * 255).toString(16).padStart(2, '0')}`;
         ctx.fill();
         
-        // Connect strands (horizontal connections / base pairs only)
+        // Connect strands (horizontal connections / base pairs only) - now with DOUBLE length
         if (i > 0 && (i % 2) === 1) {
           const prevStrand = strands[i - 1];
           const prevAngle = rotationAngle + ((i - 1) % 2 * Math.PI) + segmentOffset;
-          const prevX = Math.cos(prevAngle) * 120; // Match the wider radius
-          const prevZ = Math.sin(prevAngle) * 120; // Match the wider radius
+          
+          // Calculate the normal positions
+          const prevX = Math.cos(prevAngle) * 120;
+          const prevZ = Math.sin(prevAngle) * 120;
           const prevScale = 800 / (800 + prevZ);
           const prevX2d = centerX + prevX * prevScale;
           const prevY2d = centerY + prevStrand.y * prevScale;
           
-          // Draw the connecting line (base pair) with reduced opacity
+          // Calculate the midpoint between the two dots
+          const midX = (x2d + prevX2d) / 2;
+          const midY = (y2d + prevY2d) / 2;
+          
+          // Calculate the vector from midpoint to each dot
+          const vecX1 = x2d - midX;
+          const vecY1 = y2d - midY;
+          const vecX2 = prevX2d - midX;
+          const vecY2 = prevY2d - midY;
+          
+          // Extend the line by doubling the distance from midpoint
+          const extendedX1 = midX + vecX1 * 2;
+          const extendedY1 = midY + vecY1 * 2;
+          const extendedX2 = midX + vecX2 * 2;
+          const extendedY2 = midY + vecY2 * 2;
+          
+          // Draw the extended connecting line (base pair)
           ctx.beginPath();
-          ctx.moveTo(x2d, y2d);
-          ctx.lineTo(prevX2d, prevY2d);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * scale})`; // Reduced opacity for base pairs
+          ctx.moveTo(extendedX1, extendedY1);
+          ctx.lineTo(extendedX2, extendedY2);
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * scale})`;
           ctx.lineWidth = 1.5 * scale;
           ctx.stroke();
         }
-        
-        // Removed the vertical backbone connections
       }
       
       // Update and draw particles
