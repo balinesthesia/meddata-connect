@@ -17,12 +17,15 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    cors: false, // Disable CORS in development to prevent cross-origin requests
+    cors: true, // Enable CORS in development for easier testing
     headers: {
       // Set security headers
       "X-Content-Type-Options": "nosniff",
       "X-Frame-Options": "DENY",
-      "Content-Security-Policy": "default-src 'self'",
+      // Relaxed CSP for development
+      "Content-Security-Policy": mode === 'development' 
+        ? "default-src 'self' 'unsafe-inline' 'unsafe-eval' *" 
+        : "default-src 'self'",
     },
     hmr: {
       // Secure HMR WebSocket connections
