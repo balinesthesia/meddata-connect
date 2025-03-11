@@ -1,21 +1,31 @@
+
 # Security Policy
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+We maintain security updates for the following versions:
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Latest  | :white_check_mark: |
+
+## Security Vulnerabilities
+
+### Vite CORS Vulnerability
+
+As of November 2023, Vite versions between 5.0.0 and 5.4.11 were vulnerable to a security issue that allowed websites to send requests to development servers and read responses due to default CORS settings and lack of validation on the Origin header for WebSocket connections.
+
+This vulnerability has been patched in Vite 5.4.12 and above. We have implemented additional security measures in our Vite configuration to mitigate this issue.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability within this project, please send an email to security@meddsa.io. All security vulnerabilities will be promptly addressed.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+When reporting vulnerabilities, please include:
+
+1. Description of the vulnerability
+2. Steps to reproduce the issue
+3. Potential impact of the vulnerability
+4. Any suggestions for fixing the vulnerability (if applicable)
+
+The security team will acknowledge receipt of your report within 48 hours and will send a more detailed response within 72 hours indicating the next steps in handling your report. After the initial reply to your report, the security team will endeavor to keep you informed of the progress toward a fix and full announcement.
