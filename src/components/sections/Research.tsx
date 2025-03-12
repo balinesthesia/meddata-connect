@@ -1,3 +1,4 @@
+
 import React from "react";
 import Section from "../ui/Section";
 import AnimatedImage from "../ui/AnimatedImage";
@@ -16,7 +17,7 @@ const Research: React.FC = () => {
       id: 2,
       title: "Predictive Analytics for ICU Outcomes",
       description: "Using big data analytics to predict patient outcomes in intensive care, enabling earlier interventions and personalized treatment.",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       link: "#"
     },
     {
