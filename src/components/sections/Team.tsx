@@ -48,7 +48,7 @@ const Team: React.FC = () => {
       name: "Dr. Tjahya Aryasa",
       role: "Clinical Integration Specialist",
       bio: "Obstetric Anesthesiologist focuses on translating research findings into practical clinical applications.",
-      image: "",
+      image: "/lovable-uploads/e7c13c48-ae37-4a0e-a8d3-49f99bc78dae.png",
       email: "#",
       linkedin: "#"
     }
