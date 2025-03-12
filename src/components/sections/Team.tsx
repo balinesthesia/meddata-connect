@@ -29,7 +29,7 @@ const Team: React.FC = () => {
       name: "Dr. Marilaeta Cindryani",
       role: "Research Director & Data Scientist",
       bio: "Intensivist anesthesiologist specializes in machine learning algorithms for critical care decision support systems.",
-      image: "",
+      image: "/lovable-uploads/77bfdc95-9fc6-4e5a-827e-14a724c5ffd4.png",
       email: "#",
       linkedin: "#"
     },
