@@ -17,38 +17,38 @@ const Team: React.FC = () => {
   const teamMembers: TeamMember[] = [
     {
       id: 1,
-      name: "Dr. Jane Smith",
-      role: "Division Head & Principal Investigator",
-      bio: "Anesthesiologist with expertise in AI applications for pain management and perioperative care.",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      email: "jane.smith@meddsai.org",
+      name: "Dr. Kresna Sucandra",
+      role: "Division Head & Medical AI Engineer",
+      bio: "Intensivist Anesthesiologist with expertise in AI applications for perioperative and critical care.",
+      image: "",
+      email: "#",
       linkedin: "#"
     },
     {
       id: 2,
-      name: "Dr. Robert Chen",
-      role: "Research Director",
-      bio: "Specializes in machine learning algorithms for critical care decision support systems.",
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      email: "robert.chen@meddsai.org",
+      name: "Dr. Marilaeta Cindryani",
+      role: "Research Director & Data Scientist",
+      bio: "Intensivist anesthesiologist specializes in machine learning algorithms for critical care decision support systems.",
+      image: "",
+      email: "#",
       linkedin: "#"
     },
     {
       id: 3,
-      name: "Dr. Sarah Johnson",
-      role: "Data Science Lead",
-      bio: "Expert in biomedical data analysis and predictive modeling for patient outcomes.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2076&q=80",
-      email: "sarah.johnson@meddsai.org",
+      name: "Dr. Krisna Sutawan",
+      role: "Vice Director & Clinical Researcher",
+      bio: "Neuroanesthesiologist expert in biomedical research, and mindfulness for patient outcomes.",
+      image: "",
+      email: "#",
       linkedin: "#"
     },
     {
       id: 4,
-      name: "Prof. Michael Patel",
+      name: "Dr. Tjahya Aryasa",
       role: "Clinical Integration Specialist",
-      bio: "Focuses on translating research findings into practical clinical applications.",
-      image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2078&q=80",
-      email: "michael.patel@meddsai.org",
+      bio: "Obstetric Anesthesiologist focuses on translating research findings into practical clinical applications.",
+      image: "",
+      email: "#",
       linkedin: "#"
     }
   ];
@@ -112,7 +112,7 @@ const Team: React.FC = () => {
 
       <div className="mt-16 text-center">
         <p className="text-gray-500 mb-4">
-          Interested in joining our team?
+          Interested in contributing to our initiatives?
         </p>
         <a 
           href="#contact" 
