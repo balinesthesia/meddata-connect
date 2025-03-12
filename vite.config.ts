@@ -17,12 +17,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    cors: {
-      origin: "*",
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowedHeaders: ["Content-Type", "Authorization"],
-      credentials: true
-    },
+    cors: true, // Simplified CORS to allow all connections
     headers: {
       "X-Content-Type-Options": "nosniff",
       ...(mode === 'development' ? {} : { "X-Frame-Options": "SAMEORIGIN" }),
@@ -34,9 +29,10 @@ export default defineConfig(({ mode }) => ({
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
     hmr: {
-      clientPort: 8080,
+      clientPort: mode === 'development' ? undefined : 8080,
       host: 'localhost',
       protocol: 'ws',
+      overlay: true,
     },
   },
   base: "/", // Changed from "./" to "/" for custom domain support
