@@ -11,11 +11,15 @@ We maintain security updates for the following versions:
 
 ## Security Vulnerabilities
 
-### Vite CORS Vulnerability
+### Vite CORS and Frame Options
 
-As of November 2023, Vite versions between 5.0.0 and 5.4.11 were vulnerable to a security issue that allowed websites to send requests to development servers and read responses due to default CORS settings and lack of validation on the Origin header for WebSocket connections.
+Our application has been updated to properly handle CORS settings for both development and production environments. We've made the following security-related changes:
 
-This vulnerability has been patched in Vite 5.4.12 and above. We have implemented additional security measures in our Vite configuration to mitigate this issue.
+1. Updated CORS configuration to allow proper development-to-production connections
+2. Modified X-Frame-Options to SAMEORIGIN to enable iframe embedding for development
+3. Added explicit Access-Control headers to ensure proper cross-origin resource sharing
+
+The security configuration is managed in the vite.config.ts file with separate settings for development and production environments.
 
 ## Reporting a Vulnerability
 

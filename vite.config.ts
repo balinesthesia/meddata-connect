@@ -17,7 +17,12 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    cors: true, // Enable CORS in development for easier testing
+    cors: {
+      origin: "*", // Allow all origins in development
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+      credentials: true
+    },
     headers: {
       // Set security headers
       "X-Content-Type-Options": "nosniff",
@@ -26,11 +31,16 @@ export default defineConfig(({ mode }) => ({
       "Content-Security-Policy": mode === 'development' 
         ? "default-src 'self' 'unsafe-inline' 'unsafe-eval' *" 
         : "default-src 'self'",
+      // Add Access-Control headers for iframe embedding
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
     hmr: {
       // Secure HMR WebSocket connections
       clientPort: 8080,
       host: 'localhost',
+      protocol: 'ws',
     },
   },
   base: "/", // Changed from "./" to "/" for custom domain support
