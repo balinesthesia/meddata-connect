@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => ({
     headers: {
       // Set security headers
       "X-Content-Type-Options": "nosniff",
-      "X-Frame-Options": "SAMEORIGIN", // Changed from DENY to SAMEORIGIN to allow iframes
+      "X-Frame-Options": "SAMEORIGIN", // Changed from sameorigin to SAMEORIGIN (uppercase)
       // Relaxed CSP for development
       "Content-Security-Policy": mode === 'development' 
         ? "default-src 'self' 'unsafe-inline' 'unsafe-eval' *" 
