@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -18,26 +17,22 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     cors: {
-      origin: "*", // Allow all origins in development
+      origin: "*",
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
       credentials: true
     },
     headers: {
-      // Set security headers
       "X-Content-Type-Options": "nosniff",
-      "X-Frame-Options": "SAMEORIGIN", // Changed from sameorigin to SAMEORIGIN (uppercase)
-      // Relaxed CSP for development
-      "Content-Security-Policy": mode === 'development' 
-        ? "default-src 'self' 'unsafe-inline' 'unsafe-eval' *" 
+      "X-Frame-Options": mode === 'development' ? null : "SAMEORIGIN",
+      "Content-Security-Policy": mode === 'development'
+        ? "default-src 'self' * data: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self' *;"
         : "default-src 'self'",
-      // Add Access-Control headers for iframe embedding
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
     hmr: {
-      // Secure HMR WebSocket connections
       clientPort: 8080,
       host: 'localhost',
       protocol: 'ws',
