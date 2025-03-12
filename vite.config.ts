@@ -1,3 +1,4 @@
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -19,9 +20,9 @@ export default defineConfig(({ mode }) => ({
     cors: true,
     headers: {
       "X-Content-Type-Options": "nosniff",
-      // Remove X-Frame-Options entirely in development to allow iframe embedding
-      "Content-Security-Policy": mode === 'development' 
-        ? "default-src 'self' * data: 'unsafe-inline' 'unsafe-eval'; frame-ancestors *;" 
+      ...(mode === 'development' ? {} : { "X-Frame-Options": "SAMEORIGIN" }),
+      "Content-Security-Policy": mode === 'development'
+        ? "default-src 'self' * data: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self' *;"
         : "default-src 'self'",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
