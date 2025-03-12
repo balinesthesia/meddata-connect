@@ -20,9 +20,11 @@ export default defineConfig(({ mode }) => ({
     cors: true,
     headers: {
       "X-Content-Type-Options": "nosniff",
+      // In development mode, don't set X-Frame-Options to allow iframe embedding
       ...(mode === 'development' ? {} : { "X-Frame-Options": "SAMEORIGIN" }),
+      // Set frame-ancestors to * in CSP for development mode
       "Content-Security-Policy": mode === 'development'
-        ? "default-src 'self' * data: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self' *;"
+        ? "default-src 'self' * data: 'unsafe-inline' 'unsafe-eval'; frame-ancestors * 'self';"
         : "default-src 'self'",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
