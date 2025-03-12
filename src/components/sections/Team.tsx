@@ -1,3 +1,4 @@
+
 import React from "react";
 import Section from "../ui/Section";
 import { Linkedin, Mail } from "lucide-react";
@@ -38,7 +39,7 @@ const Team: React.FC = () => {
       name: "Dr. Krisna Sutawan",
       role: "Vice Director & Clinical Researcher",
       bio: "Neuroanesthesiologist expert in biomedical research, and mindfulness for patient outcomes.",
-      image: "",
+      image: "/lovable-uploads/ba190621-926c-4d80-b69b-257b833ebea4.png",
       email: "#",
       linkedin: "#"
     },
