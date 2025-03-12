@@ -16,8 +16,9 @@ We maintain security updates for the following versions:
 Our application has been updated to properly handle CORS settings for both development and production environments. We've made the following security-related changes:
 
 1. Updated CORS configuration to allow proper development-to-production connections
-2. Modified X-Frame-Options to SAMEORIGIN to enable iframe embedding for development
+2. Modified X-Frame-Options handling to allow iframe embedding in development while maintaining SAMEORIGIN policy in production
 3. Added explicit Access-Control headers to ensure proper cross-origin resource sharing
+4. Configured Content-Security-Policy with frame-ancestors to support iframe embedding in development
 
 The security configuration is managed in the vite.config.ts file with separate settings for development and production environments.
 

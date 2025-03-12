@@ -1,3 +1,4 @@
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -24,7 +25,7 @@ export default defineConfig(({ mode }) => ({
     },
     headers: {
       "X-Content-Type-Options": "nosniff",
-      "X-Frame-Options": mode === 'development' ? null : "SAMEORIGIN",
+      ...(mode === 'development' ? {} : { "X-Frame-Options": "SAMEORIGIN" }),
       "Content-Security-Policy": mode === 'development'
         ? "default-src 'self' * data: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self' *;"
         : "default-src 'self'",
