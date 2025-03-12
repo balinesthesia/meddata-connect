@@ -1,7 +1,7 @@
-
 import React from "react";
 import Section from "../ui/Section";
 import { Linkedin, Mail } from "lucide-react";
+import AnimatedImage from "../ui/AnimatedImage";
 
 interface TeamMember {
   id: number;
@@ -20,7 +20,7 @@ const Team: React.FC = () => {
       name: "Dr. Kresna Sucandra",
       role: "Division Head & Medical AI Engineer",
       bio: "Intensivist Anesthesiologist with expertise in AI applications for perioperative and critical care.",
-      image: "",
+      image: "/lovable-uploads/f30c0dc3-91ac-4a54-bdc0-a4b8a2e251bd.png",
       email: "#",
       linkedin: "#"
     },
@@ -70,9 +70,9 @@ const Team: React.FC = () => {
         {teamMembers.map((member) => (
           <div key={member.id} className="group">
             <div className="relative overflow-hidden rounded-xl mb-4 aspect-[4/5]">
-              <img 
-                src={member.image} 
-                alt={member.name} 
+              <AnimatedImage 
+                src={member.image || '/placeholder.svg'} 
+                alt={member.name}
                 className="w-full h-full object-cover transition-transform duration-700 ease-custom group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-80" />
